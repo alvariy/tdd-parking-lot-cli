@@ -1,9 +1,6 @@
 package com.oocl.cultivation.test;
 
-import com.oocl.cultivation.Car;
-import com.oocl.cultivation.ParkingBoy;
-import com.oocl.cultivation.ParkingLot;
-import com.oocl.cultivation.ParkingTicket;
+import com.oocl.cultivation.*;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -220,6 +217,31 @@ class ParkingBoyFacts {
         assertEquals(9, actualCarSize);
     }
 
+    @Test
+    void smart_parking_boy_should_park_in_the_most_empty_parking_lot() {
+
+        //given
+        ParkingLot parkingLot = new ParkingLot();
+        ParkingLot parkingLot2 = new ParkingLot();
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
+        ParkingBoy parkingBoy1 = new ParkingBoy(parkingLot2);
+        SmartParkingBoy smartParkingBoy = new SmartParkingBoy(parkingLot, parkingLot2);
+        //when
+        for(int i = 1; i <= 3 ; i++)
+        {
+            Car car = new Car();
+            parkingBoy.park(car);
+        }
+        for(int i = 1; i <= 2 ; i++)
+        {
+            Car car = new Car();
+            parkingBoy1.park(car);
+        }
+        Car nissan = new Car();
+        smartParkingBoy.park(nissan);
 
 
+        //then
+        assertEquals(7, parkingLot2.getAvailableParkingPosition());
+    }
 }

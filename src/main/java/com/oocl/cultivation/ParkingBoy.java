@@ -2,9 +2,9 @@ package com.oocl.cultivation;
 
 public class ParkingBoy {
 
-    private final ParkingLot parkingLot;
-    private final ParkingLot parkingLot2;
-    private String lastErrorMessage;
+    public ParkingLot parkingLot;
+    public ParkingLot parkingLot2;
+    public String lastErrorMessage;
 
     public ParkingBoy(ParkingLot parkingLot, ParkingLot parkingLot2) {
         this.parkingLot = parkingLot;
