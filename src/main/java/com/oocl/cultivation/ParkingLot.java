@@ -8,7 +8,11 @@ public class ParkingLot {
         return capacity;
     }
 
-    private final int capacity;
+    public void setCapacity(int capacity) {
+        this.capacity = capacity;
+    }
+
+    private int capacity;
 
 
     private Map<ParkingTicket, Car> cars = new HashMap<>();

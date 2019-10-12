@@ -244,4 +244,19 @@ class ParkingBoyFacts {
         //then
         assertEquals(7, parkingLot2.getAvailableParkingPosition());
     }
+
+    @Test
+    void super_saiyan_parking_boy_should_park_car_with_the_highest_ratio_parking_lot() {
+        //given
+        ParkingLot parkingLot = new ParkingLot(10);
+        ParkingLot parkingLot1 = new ParkingLot(20);
+        SuperSmartParkingBoy superSmartParkingBoy = new SuperSmartParkingBoy(parkingLot,parkingLot1);
+
+        //when
+        Car car = new Car();
+        superSmartParkingBoy.park(car);
+
+        //then
+        assertEquals(19, parkingLot1.getAvailableParkingPosition());
+    }
 }
