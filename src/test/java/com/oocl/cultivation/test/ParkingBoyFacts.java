@@ -141,4 +141,60 @@ class ParkingBoyFacts {
         //then
         assertEquals(null, ticket);
     }
+
+    @Test
+    void should_get_message_if_no_car_was_fetched() {
+
+        //given
+        ParkingLot parkingLot = new ParkingLot();
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
+        ParkingTicket parkingTicket = new ParkingTicket();
+        String errorMessage;
+
+        //when
+        parkingBoy.fetch(parkingTicket);
+        errorMessage = parkingBoy.getLastErrorMessage();
+
+        //then
+        assertEquals("Unrecognized parking ticket.", errorMessage);
+
+    }
+
+    @Test
+    void should_get_message_if_no_car_was_fetched_and_ticket_is_null() {
+
+        //given
+        ParkingLot parkingLot = new ParkingLot();
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
+        String errorMessage;
+
+        //when
+        parkingBoy.fetch(null);
+        errorMessage = parkingBoy.getLastErrorMessage();
+
+        //then
+        assertEquals("Please provide your parking ticket.", errorMessage);
+
+    }
+
+    @Test
+    void should_get_message_not_enough_position_if_the_parking_boy_parked_in_a_full_parking_lot() {
+
+        //given
+        ParkingLot parkingLot = new ParkingLot();
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
+
+        for(int i = 0; i <= parkingLot.getCapacity() ; i++)
+        {
+            Car car = new Car();
+            parkingBoy.park(car);
+        }
+
+
+        //when
+        String errorMessage = parkingBoy.getLastErrorMessage();
+
+        //then
+        assertEquals("Not enough position.", errorMessage);
+    }
 }

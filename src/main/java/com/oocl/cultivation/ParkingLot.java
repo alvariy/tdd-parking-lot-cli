@@ -10,13 +10,6 @@ public class ParkingLot {
 
     private final int capacity;
 
-    public Map<ParkingTicket, Car> getCars() {
-        return cars;
-    }
-
-    public void setCars(Map<ParkingTicket, Car> cars) {
-        this.cars = cars;
-    }
 
     private Map<ParkingTicket, Car> cars = new HashMap<>();
 
