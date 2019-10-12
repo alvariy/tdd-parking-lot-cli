@@ -30,13 +30,14 @@ class ParkingBoyFacts {
         //given
         ParkingLot parkingLot = new ParkingLot();
         ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
-        ParkingTicket ticket = new ParkingTicket();
+        Car car = new Car();
 
         //when
-        Car car = parkingBoy.fetch(ticket);
+        ParkingTicket ticket = parkingBoy.park(car);
+        Car car1 = parkingBoy.fetch(ticket);
 
         //then
-        assertNotNull(car);
+        assertNotNull(car1);
     }
 
     @Test
@@ -197,4 +198,28 @@ class ParkingBoyFacts {
         //then
         assertEquals("Not enough position.", errorMessage);
     }
+
+    @Test
+    void should_park_in_the_second_parking_lot_if_the_first_one_is_full() {
+
+        //given
+        ParkingLot parkingLot = new ParkingLot();
+        ParkingLot parkingLot2 = new ParkingLot();
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLot, parkingLot2);
+
+        //when
+        for(int i = 0; i <= parkingLot.getCapacity() ; i++)
+        {
+            Car car = new Car();
+            parkingBoy.park(car);
+        }
+
+        int actualCarSize = parkingLot2.getAvailableParkingPosition();
+
+        //then
+        assertEquals(9, actualCarSize);
+    }
+
+
+
 }

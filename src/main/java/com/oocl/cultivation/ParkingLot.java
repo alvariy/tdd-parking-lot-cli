@@ -31,7 +31,6 @@ public class ParkingLot {
         {
             return null;
         }
-
         ParkingTicket ticket = new ParkingTicket();
         cars.put(ticket,car);
         return ticket;

@@ -3,17 +3,35 @@ package com.oocl.cultivation;
 public class ParkingBoy {
 
     private final ParkingLot parkingLot;
+    private final ParkingLot parkingLot2;
     private String lastErrorMessage;
 
+    public ParkingBoy(ParkingLot parkingLot, ParkingLot parkingLot2) {
+        this.parkingLot = parkingLot;
+        this.parkingLot2 = parkingLot2;
+    }
     public ParkingBoy(ParkingLot parkingLot) {
         this.parkingLot = parkingLot;
+        this.parkingLot2 = null;
     }
 
     public ParkingTicket park(Car car) {
         // TODO: Please implement the method
 
-        ParkingTicket parkingTicket = parkingLot.addCar(car);
-        if(parkingTicket == null)
+        ParkingTicket parkingTicket;
+
+        parkingTicket = parkingLot.addCar(car);
+
+        if(parkingTicket == null && parkingLot2 != null)
+        {
+            parkingTicket = parkingLot2.addCar(car);
+
+                if(parkingTicket == null)
+                {
+                    lastErrorMessage = "Not enough position.";
+                }
+        }
+        else
         {
             lastErrorMessage = "Not enough position.";
         }
