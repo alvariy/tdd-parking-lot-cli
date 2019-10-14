@@ -13,17 +13,17 @@ public class SmartParkingBoy extends ParkingBoy{
 
         if(checkParkingSpace())
         {
-            ticket = secondParkingLot.addCar(car);
+            ticket = getSecondParkingLot().addCar(car);
         }
         else
         {
-            ticket = parkingLot.addCar(car);
+            ticket = getParkingLot().addCar(car);
         }
 
         return ticket;
     }
 
     private boolean checkParkingSpace() {
-        return parkingLot.getAvailableParkingPosition() < secondParkingLot.getAvailableParkingPosition();
+        return getParkingLot().getAvailableParkingPosition() < getSecondParkingLot().getAvailableParkingPosition();
     }
 }

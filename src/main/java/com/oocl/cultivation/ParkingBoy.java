@@ -2,8 +2,8 @@ package com.oocl.cultivation;
 
 public class ParkingBoy {
 
-    public ParkingLot parkingLot;
-    public ParkingLot secondParkingLot;
+    private ParkingLot parkingLot;
+    private ParkingLot secondParkingLot;
     private String lastErrorMessage;
     private static final String CONST_NO_POSITION_AVAILABLE = "Not enough position.";
     private static final String CONST_ERROR_PROVIDE_PARKING_TICKET = "Please provide your parking ticket.";
@@ -60,5 +60,13 @@ public class ParkingBoy {
 
     public String getLastErrorMessage() {
         return lastErrorMessage;
+    }
+
+    public ParkingLot getSecondParkingLot() {
+        return secondParkingLot;
+    }
+
+    public ParkingLot getParkingLot() {
+        return parkingLot;
     }
 }
