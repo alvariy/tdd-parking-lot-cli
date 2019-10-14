@@ -2,8 +2,8 @@ package com.oocl.cultivation;
 
 public class SuperSmartParkingBoy extends ParkingBoy{
 
-    public SuperSmartParkingBoy(ParkingLot parkingLot, ParkingLot parkingLot2) {
-        super(parkingLot, parkingLot2);
+    public SuperSmartParkingBoy(ParkingLot parkingLot, ParkingLot secondParkingLot) {
+        super(parkingLot, secondParkingLot);
     }
 
     @Override
@@ -12,13 +12,13 @@ public class SuperSmartParkingBoy extends ParkingBoy{
         ParkingTicket ticket;
 
         if((Double.parseDouble(Integer.toString(parkingLot.getAvailableParkingPosition()))/Double.parseDouble(Integer.toString(parkingLot.getCapacity())))
-                > (Double.parseDouble(Integer.toString(parkingLot2.getAvailableParkingPosition()))/Double.parseDouble(Integer.toString(parkingLot2.getCapacity()))))
+                > (Double.parseDouble(Integer.toString(secondParkingLot.getAvailableParkingPosition()))/Double.parseDouble(Integer.toString(secondParkingLot.getCapacity()))))
         {
             ticket = parkingLot.addCar(car);
         }
         else
         {
-            ticket = parkingLot2.addCar(car);
+            ticket = secondParkingLot.addCar(car);
         }
 
         return ticket;

@@ -2,17 +2,17 @@ package com.oocl.cultivation;
 
 public class SmartParkingBoy extends ParkingBoy{
 
-    public SmartParkingBoy(ParkingLot parkingLot, ParkingLot parkingLot2) {
-        super(parkingLot, parkingLot2);
+    public SmartParkingBoy(ParkingLot parkingLot, ParkingLot secondParkingLot) {
+        super(parkingLot, secondParkingLot);
     }
 
     @Override
     public ParkingTicket park(Car car) {
 
         ParkingTicket ticket;
-        if(parkingLot.getAvailableParkingPosition() < parkingLot2.getAvailableParkingPosition())
+        if(parkingLot.getAvailableParkingPosition() < secondParkingLot.getAvailableParkingPosition())
         {
-            ticket = parkingLot2.addCar(car);
+            ticket = secondParkingLot.addCar(car);
         }
         else
         {

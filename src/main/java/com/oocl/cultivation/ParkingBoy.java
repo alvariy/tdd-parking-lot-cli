@@ -3,28 +3,26 @@ package com.oocl.cultivation;
 public class ParkingBoy {
 
     public ParkingLot parkingLot;
-    public ParkingLot parkingLot2;
-    public String lastErrorMessage;
+    public ParkingLot secondParkingLot;
+    private String lastErrorMessage;
 
-    public ParkingBoy(ParkingLot parkingLot, ParkingLot parkingLot2) {
+    public ParkingBoy(ParkingLot parkingLot, ParkingLot secondParkingLot) {
         this.parkingLot = parkingLot;
-        this.parkingLot2 = parkingLot2;
+        this.secondParkingLot = secondParkingLot;
     }
     public ParkingBoy(ParkingLot parkingLot) {
         this.parkingLot = parkingLot;
-        this.parkingLot2 = null;
     }
 
     public ParkingTicket park(Car car) {
-        // TODO: Please implement the method
 
         ParkingTicket parkingTicket;
 
         parkingTicket = parkingLot.addCar(car);
 
-        if(parkingTicket == null && parkingLot2 != null)
+        if(parkingTicket == null && secondParkingLot != null)
         {
-            parkingTicket = parkingLot2.addCar(car);
+            parkingTicket = secondParkingLot.addCar(car);
 
                 if(parkingTicket == null)
                 {
@@ -40,7 +38,6 @@ public class ParkingBoy {
     }
 
     public Car fetch(ParkingTicket ticket) {
-        // TODO: Please implement the method
 
         Car car = parkingLot.removeCar(ticket);
         if(ticket == null)

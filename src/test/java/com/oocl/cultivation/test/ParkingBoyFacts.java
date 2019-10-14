@@ -9,176 +9,144 @@ class ParkingBoyFacts {
     @Test
     void parkingBoy_should_park_the_car_and_return_a_ticket() {
 
-        //given
         ParkingLot parkingLot = new ParkingLot();
         ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
         Car car =  new Car();
 
-        //when
         ParkingTicket ticket = parkingBoy.park(car);
 
-        //then
         assertNotNull(ticket);
     }
 
     @Test
     void parkingBoy_should_fetch_the_car_using_ticket() {
 
-        //given
         ParkingLot parkingLot = new ParkingLot();
         ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
         Car car = new Car();
 
-        //when
         ParkingTicket ticket = parkingBoy.park(car);
         Car car1 = parkingBoy.fetch(ticket);
 
-        //then
         assertNotNull(car1);
     }
 
     @Test
     void should_park_two_cars_in_parking_lot() {
 
-        //given
         ParkingLot parkingLot = new ParkingLot();
         ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
         Car car = new Car();
         Car car1 = new Car();
+        int expectedValue = 8;
 
-        //when
         parkingBoy.park(car);
         parkingBoy.park(car1);
+        int actualValue = parkingLot.getAvailableParkingPosition();
 
-        //then
-        assertEquals(8, parkingLot.getAvailableParkingPosition());
+        assertEquals(expectedValue, actualValue);
 
     }
 
     @Test
     void should_fetch_the_car_according_to_ticket() {
 
-        //given
         ParkingLot parkingLot = new ParkingLot();
         ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
-        Car nissan = new Car();
+        Car expectedCar = new Car();
 
-        //when
-        ParkingTicket ticket = parkingBoy.park(nissan);
-        Car car = parkingBoy.fetch(ticket);
+        ParkingTicket ticket = parkingBoy.park(expectedCar);
+        Car actualCar = parkingBoy.fetch(ticket);
 
-        //then
-        assertEquals(nissan, car);
+        assertEquals(expectedCar, actualCar);
 
     }
 
     @Test
     void should_not_fetch_car_if_it_is_an_invalid_ticket() {
 
-        //given
         ParkingLot parkingLot = new ParkingLot();
         ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
         ParkingTicket parkingTicket = new ParkingTicket();
 
-        //when
-        Car car = parkingBoy.fetch(parkingTicket);
+        Car actualValue = parkingBoy.fetch(parkingTicket);
 
-        //then
-        assertEquals(null, car);
+        assertEquals(null, actualValue);
 
     }
 
     @Test
     void should_not_fetch_car_if_no_ticket_was_given() {
 
-        //given
         ParkingLot parkingLot = new ParkingLot();
         ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
 
-        //when
-        Car car = parkingBoy.fetch(null);
+        Car actualValue = parkingBoy.fetch(null);
 
-        //then
-        assertEquals(null, car);
+        assertEquals(null, actualValue);
     }
 
     @Test
     void should_not_fetch_car_if_the_ticket_has_already_been_used() {
 
-        //given
         ParkingLot parkingLot = new ParkingLot();
         ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
-        Car nissan = new Car();
+        Car dummyCar = new Car();
 
-        ParkingTicket ticket = parkingBoy.park(nissan);
+        ParkingTicket ticket = parkingBoy.park(dummyCar);
         parkingBoy.fetch(ticket);
+        Car actualValue = parkingBoy.fetch(ticket);
 
-        //when
 
-        //then
-        assertEquals(null, parkingBoy.fetch(ticket));
+        assertEquals(null, actualValue);
     }
 
     @Test
     void should_not_be_able_to_give_ticket_if_no_available_slots_in_the_parking_lot() {
 
-        //given
         ParkingLot parkingLot = new ParkingLot();
         ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
 
-
-        //when
         for(int i = 1 ; i<= parkingLot.getCapacity(); i++)
         {
             Car car = new Car();
             parkingBoy.park(car);
         }
 
-        ParkingTicket ticket = parkingBoy.park(new Car());
-        System.out.println(parkingLot.getAvailableParkingPosition());
-        //then
-        assertEquals(null, ticket);
+        ParkingTicket actualValue = parkingBoy.park(new Car());
+        assertEquals(null, actualValue);
     }
 
     @Test
     void should_get_message_if_no_car_was_fetched() {
 
-        //given
         ParkingLot parkingLot = new ParkingLot();
         ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
         ParkingTicket parkingTicket = new ParkingTicket();
-        String errorMessage;
 
-        //when
         parkingBoy.fetch(parkingTicket);
-        errorMessage = parkingBoy.getLastErrorMessage();
+        String actualErrorMessage = parkingBoy.getLastErrorMessage();
 
-        //then
-        assertEquals("Unrecognized parking ticket.", errorMessage);
+        assertEquals("Unrecognized parking ticket.", actualErrorMessage);
 
     }
 
     @Test
     void should_get_message_if_no_car_was_fetched_and_ticket_is_null() {
 
-        //given
         ParkingLot parkingLot = new ParkingLot();
         ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
-        String errorMessage;
 
-        //when
         parkingBoy.fetch(null);
-        errorMessage = parkingBoy.getLastErrorMessage();
+        String actualErrorMessage = parkingBoy.getLastErrorMessage();
 
-        //then
-        assertEquals("Please provide your parking ticket.", errorMessage);
+        assertEquals("Please provide your parking ticket.", actualErrorMessage);
 
     }
 
     @Test
     void should_get_message_not_enough_position_if_the_parking_boy_parked_in_a_full_parking_lot() {
 
-        //given
         ParkingLot parkingLot = new ParkingLot();
         ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
 
@@ -188,45 +156,39 @@ class ParkingBoyFacts {
             parkingBoy.park(car);
         }
 
+        String actualErrorMessage = parkingBoy.getLastErrorMessage();
 
-        //when
-        String errorMessage = parkingBoy.getLastErrorMessage();
-
-        //then
-        assertEquals("Not enough position.", errorMessage);
+        assertEquals("Not enough position.", actualErrorMessage);
     }
 
     @Test
     void should_park_in_the_second_parking_lot_if_the_first_one_is_full() {
 
-        //given
         ParkingLot parkingLot = new ParkingLot();
-        ParkingLot parkingLot2 = new ParkingLot();
-        ParkingBoy parkingBoy = new ParkingBoy(parkingLot, parkingLot2);
+        ParkingLot secondParkingLot = new ParkingLot();
+        ParkingBoy parkingBoy = new ParkingBoy(parkingLot, secondParkingLot);
 
-        //when
         for(int i = 0; i <= parkingLot.getCapacity() ; i++)
         {
             Car car = new Car();
             parkingBoy.park(car);
         }
 
-        int actualCarSize = parkingLot2.getAvailableParkingPosition();
+        int expectedCarSize = 9;
+        int actualCarSize = secondParkingLot.getAvailableParkingPosition();
 
-        //then
-        assertEquals(9, actualCarSize);
+        assertEquals(expectedCarSize, actualCarSize);
     }
 
     @Test
     void smart_parking_boy_should_park_in_the_most_empty_parking_lot() {
 
-        //given
         ParkingLot parkingLot = new ParkingLot();
-        ParkingLot parkingLot2 = new ParkingLot();
+        ParkingLot secondParkingLot = new ParkingLot();
         ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
-        ParkingBoy parkingBoy1 = new ParkingBoy(parkingLot2);
-        SmartParkingBoy smartParkingBoy = new SmartParkingBoy(parkingLot, parkingLot2);
-        //when
+        ParkingBoy secondParkingBoy = new ParkingBoy(secondParkingLot);
+        SmartParkingBoy smartParkingBoy = new SmartParkingBoy(parkingLot, secondParkingLot);
+
         for(int i = 1; i <= 3 ; i++)
         {
             Car car = new Car();
@@ -235,28 +197,30 @@ class ParkingBoyFacts {
         for(int i = 1; i <= 2 ; i++)
         {
             Car car = new Car();
-            parkingBoy1.park(car);
+            secondParkingBoy.park(car);
         }
+
         Car nissan = new Car();
         smartParkingBoy.park(nissan);
 
+        int actualCarSize = secondParkingLot.getAvailableParkingPosition();
 
-        //then
-        assertEquals(7, parkingLot2.getAvailableParkingPosition());
+
+        assertEquals(7, actualCarSize);
     }
 
     @Test
     void super_saiyan_parking_boy_should_park_car_with_the_highest_ratio_parking_lot() {
-        //given
+
         ParkingLot parkingLot = new ParkingLot(10);
         ParkingLot parkingLot1 = new ParkingLot(20);
         SuperSmartParkingBoy superSmartParkingBoy = new SuperSmartParkingBoy(parkingLot,parkingLot1);
 
-        //when
         Car car = new Car();
         superSmartParkingBoy.park(car);
 
-        //then
-        assertEquals(19, parkingLot1.getAvailableParkingPosition());
+        int actualCarSize = parkingLot1.getAvailableParkingPosition();
+
+        assertEquals(19, actualCarSize);
     }
 }
