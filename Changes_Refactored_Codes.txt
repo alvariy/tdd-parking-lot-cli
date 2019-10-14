@@ -1,0 +1,12 @@
+Codes that has been refactored:
+changeVariable names
+parkingLot2 = secondParkingLot <= variable
+Remove given when then comments in test cases
+For more readable code I changed the variable in assert line to actual and expected values
+Remove System out in line 105
+Remove unecessary comments
+Remove one parameter in line 15 in ParkingBoy.java
+Change string literal to constants in errorMessage
+Convert the checking of ratio to a method
+Convert duplicate condition then I created a method for that
+Change attributes of ParkingBoy from publiv to private
