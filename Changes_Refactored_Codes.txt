@@ -14,3 +14,4 @@ Change attributes of ParkingBoy from publiv to private
 Code Smells: 
 Duplicated Code 
 Comments
+Primitive Obsession
