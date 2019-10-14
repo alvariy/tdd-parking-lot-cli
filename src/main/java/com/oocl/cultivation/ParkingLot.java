@@ -31,7 +31,7 @@ public class ParkingLot {
 
     public ParkingTicket addCar(Car car) {
 
-        if(getAvailableParkingPosition() == 0 )
+        if(getAvailableParkingPosition() == 0)
         {
             return null;
         }

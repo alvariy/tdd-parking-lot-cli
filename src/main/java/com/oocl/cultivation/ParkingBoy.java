@@ -5,6 +5,9 @@ public class ParkingBoy {
     public ParkingLot parkingLot;
     public ParkingLot secondParkingLot;
     private String lastErrorMessage;
+    private static final String CONST_NO_POSITION_AVAILABLE = "Not enough position.";
+    private static final String CONST_ERROR_PROVIDE_PARKING_TICKET = "Please provide your parking ticket.";
+    private static final String CONST_ERROR_INVALID_PARKING_TICKET = "Unrecognized parking ticket.";
 
     public ParkingBoy(ParkingLot parkingLot, ParkingLot secondParkingLot) {
         this.parkingLot = parkingLot;
@@ -20,33 +23,36 @@ public class ParkingBoy {
 
         parkingTicket = parkingLot.addCar(car);
 
-        if(parkingTicket == null && secondParkingLot != null)
+        if(isParkingTicketNull(parkingTicket) && secondParkingLot != null)
         {
             parkingTicket = secondParkingLot.addCar(car);
-
-                if(parkingTicket == null)
+                if(isParkingTicketNull(parkingTicket))
                 {
-                    lastErrorMessage = "Not enough position.";
+                    lastErrorMessage = CONST_NO_POSITION_AVAILABLE;
                 }
         }
         else
         {
-            lastErrorMessage = "Not enough position.";
+            lastErrorMessage = CONST_NO_POSITION_AVAILABLE;
         }
 
         return parkingTicket;
     }
 
+    private boolean isParkingTicketNull(ParkingTicket parkingTicket) {
+        return parkingTicket == null;
+    }
+
     public Car fetch(ParkingTicket ticket) {
 
         Car car = parkingLot.removeCar(ticket);
-        if(ticket == null)
+        if(isParkingTicketNull(ticket))
         {
-            lastErrorMessage = "Please provide your parking ticket.";
+            lastErrorMessage = CONST_ERROR_PROVIDE_PARKING_TICKET;
         }
         else if(car == null)
         {
-            lastErrorMessage = "Unrecognized parking ticket.";
+            lastErrorMessage = CONST_ERROR_INVALID_PARKING_TICKET;
         }
 
         return car;

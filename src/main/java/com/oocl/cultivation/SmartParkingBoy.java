@@ -10,7 +10,8 @@ public class SmartParkingBoy extends ParkingBoy{
     public ParkingTicket park(Car car) {
 
         ParkingTicket ticket;
-        if(parkingLot.getAvailableParkingPosition() < secondParkingLot.getAvailableParkingPosition())
+
+        if(checkParkingSpace())
         {
             ticket = secondParkingLot.addCar(car);
         }
@@ -20,5 +21,9 @@ public class SmartParkingBoy extends ParkingBoy{
         }
 
         return ticket;
+    }
+
+    private boolean checkParkingSpace() {
+        return parkingLot.getAvailableParkingPosition() < secondParkingLot.getAvailableParkingPosition();
     }
 }

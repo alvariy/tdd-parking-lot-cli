@@ -11,8 +11,7 @@ public class SuperSmartParkingBoy extends ParkingBoy{
 
         ParkingTicket ticket;
 
-        if((Double.parseDouble(Integer.toString(parkingLot.getAvailableParkingPosition()))/Double.parseDouble(Integer.toString(parkingLot.getCapacity())))
-                > (Double.parseDouble(Integer.toString(secondParkingLot.getAvailableParkingPosition()))/Double.parseDouble(Integer.toString(secondParkingLot.getCapacity()))))
+        if(hasMoreRatio())
         {
             ticket = parkingLot.addCar(car);
         }
@@ -23,4 +22,11 @@ public class SuperSmartParkingBoy extends ParkingBoy{
 
         return ticket;
     }
+
+    private boolean hasMoreRatio() {
+        return (Double.parseDouble(Integer.toString(parkingLot.getAvailableParkingPosition()))/Double.parseDouble(Integer.toString(parkingLot.getCapacity())))
+                > (Double.parseDouble(Integer.toString(secondParkingLot.getAvailableParkingPosition()))/Double.parseDouble(Integer.toString(secondParkingLot.getCapacity())));
+    }
+
+
 }
