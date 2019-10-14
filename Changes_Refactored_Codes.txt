@@ -10,3 +10,7 @@ Change string literal to constants in errorMessage
 Convert the checking of ratio to a method
 Convert duplicate condition then I created a method for that
 Change attributes of ParkingBoy from publiv to private
+
+Code Smells: 
+Duplicated Code 
+Comments
